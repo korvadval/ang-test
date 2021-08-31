@@ -13,6 +13,8 @@ export class CarComponent implements OnInit {
   model!: string;
   colors!: Colors;
   options!:string[];
+  isEdit:boolean=false;
+  editText:string='ShowEdit';
 
   constructor() { }
 
@@ -26,6 +28,28 @@ export class CarComponent implements OnInit {
       wheels:'Silver',
     };
     this.options=["ABS","Auto parking", "Auto drive"]
+  }
+
+  showEdit(){
+    this.isEdit=!this.isEdit;
+    if(this.isEdit){
+      this.editText="Close edit"
+    }else{
+      this.editText="Show edit"
+    }
+  }
+
+  addOpt(option:any){
+      this.options.unshift(option);
+      return false;
+  }
+  deleteOpt(option:any){
+    for(let i=0;i<this.options.length; i++){
+      if(this.options[i]==option){
+        this.options.splice(i, 1);
+        break;
+      }
+    }
   }
   carSelect(carName:string){
     if(carName=='bmw'){

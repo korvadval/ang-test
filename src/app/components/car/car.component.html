@@ -1,8 +1,8 @@
 <div class="container">
     <br>
     <h4>
-        <mark>Car:</mark>{{name}}
-        <small>{{model}}</small>
+        <div>Car: {{name}}<small>{{model}}</small></div>
+        
     </h4>
     <div class="alert alert-success">
         Characters:
@@ -13,10 +13,41 @@
             <li>Wheels color: <strong>{{colors.wheels}}</strong></li>
         </ul>
     </div>
+
+    <h5>Change data</h5>
+    <button class="btn btn-danger" (click)="showEdit()">{{editText}}</button>
+    <form *ngIf=isEdit>
+        <div class="form-group">
+            <input type="text" placeholder="Car"
+                   class="form-control" [(ngModel)]="name" name="name">
+            <input type="text" placeholder="Model"
+                    class="form-control"[(ngModel)]="model" name="model">
+            <input type="number" placeholder="Speed"
+                    class="form-control"[(ngModel)]="speed" name="speed">
+            <input type="text" placeholder="Color"
+                    class="form-control"[(ngModel)]="colors.car" name="car">
+            <input type="text" placeholder="Salon color"
+                    class="form-control"[(ngModel)]="colors.salon" name="salon">
+            <input type="text" placeholder="Wheels color"
+                    class="form-control"[(ngModel)]="colors.wheels" name="wheels">
+        </div>
+    </form>
+
     <h5>Possibilities</h5>
+    <form (submit)="addOpt(option.value)">
+        <div class="form-group">
+            <label for="options">Create new posibilities:</label>
+            <input type="text" id="option" placeholder="Text there..."
+                   class="form-control" #option>
+            <button type="submit" class=" btn btn-outline-success">Add posibilities</button>
+        </div>
+    </form>
+
     <div class="alert alert-warning">
         <ul>
-            <li *ngFor="let opt of options">{{opt}}</li>
+            <li *ngFor="let opt of options">
+                {{opt}} <button class="btn btn-danger btn-sm" (click)="deleteOpt(opt)">X</button>
+            </li>
         </ul>
     </div>
     <h5>Choose car</h5>
